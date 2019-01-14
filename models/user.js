@@ -2,12 +2,11 @@ const db = require('../db/config');
 const user ={};
 
 
-
   user.create = (req, res, next) => {
-    db.one('INSERT INTO users (userName,phone,email ) VALUES($1, $2, $3, ) RETURNING *;',
-      [req.body.userName, req.body.phone, req.body.email])
+    db.one('INSERT INTO users (username, phone, email ) VALUES($1, $2, $3) RETURNING *;',
+      [req.body.username, req.body.phone, req.body.email])
       .then((data) => {
-        res.locals.item = data;
+        res.locals.user = data;
         next();
       })
       .catch((error) => {
@@ -15,11 +14,11 @@ const user ={};
         next();
       })
   }
+
   user.find = (req, res, next) => {
-    const id = req.params.id;
-    db.oneOrNone("SELECT * FROM users WHERE id = $1;", [id])
+    db.oneOrNone("SELECT * FROM users WHERE username = $1;", [req.params.username])
       .then(result => {
-        res.locals.item = result;
+        res.locals.user = result;
         next();
       })
       .catch(error => {
@@ -27,10 +26,6 @@ const user ={};
         next();
       })
   }
-  
-  
-
-
 
 
 module.exports = user;

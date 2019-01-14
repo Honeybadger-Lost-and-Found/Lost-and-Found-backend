@@ -1,5 +1,5 @@
 const db = require('../db/config');
-const item ={};
+const item = {};
 
 item.getAll = (req, res, next) => {
     db.manyOrNone('SELECT * FROM items;')
@@ -14,8 +14,7 @@ item.getAll = (req, res, next) => {
   }
 
   item.find = (req, res, next) => {
-    const id = req.params.id;
-    db.oneOrNone("SELECT * FROM items WHERE id = $1;", [id])
+    db.oneOrNone("SELECT * FROM items WHERE id = $1;", [req.params.id])
       .then(result => {
         res.locals.item = result;
         next();
@@ -24,6 +23,18 @@ item.getAll = (req, res, next) => {
         console.log(error);
         next();
       })
+  }
+
+  item.findItemsByUser = (req, res, next) => {
+      db.manyOrNone("SELECT * FROM items WHERE addedBy = $1;", [req.params.id])
+        .then(result => {
+            res.locals.items = result;
+            next();
+        })
+        .catch(error => {
+            console.log(error);
+            next();
+        })
   }
   
 
