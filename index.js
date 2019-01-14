@@ -14,6 +14,7 @@ const { CLIENT_ORIGIN } = require('./db/config')
 
 const app = express()
 const itemController = require('./controllers/itemController');
+const userController = require('./controllers/userController');
 
 app.use(logger('dev'));
 
@@ -26,7 +27,8 @@ app.get('/', (req, res) => {
   res.send('Lost and Found!');
 })
 
-app.use('/items', itemController)
+app.use('/items', itemController);
+app.use('/users', userController);
 
 app.listen(port, () => {
   console.log('---------------------------------------');

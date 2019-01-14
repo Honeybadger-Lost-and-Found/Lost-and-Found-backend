@@ -8,7 +8,7 @@ CREATE DATABASE lost_and_found;
 CREATE TABLE users(
 
 id SERIAL PRIMARY KEY,
-userName varchar UNIQUE not null,
+username varchar UNIQUE not null,
 phone VARCHAR,
 email VARCHAR
 );
@@ -24,12 +24,11 @@ lon DOUBLE PRECISION,
 addedBy INTEGER,
 receivedBy INTEGER ,
 addedDate DATE,
-FOREIGN KEY(addedBy) REFERENCES contact,
-FOREIGN KEY(receivedBy) REFERENCES contact
+FOREIGN KEY(addedBy) REFERENCES users
 );
 
 
-INSERT INTO users(userName, phone, email)VALUES('Ahmad','05467990','abcd@hotmail.com'),
+INSERT INTO users(username, phone, email)VALUES('Ahmad','05467990','abcd@hotmail.com'),
 ('Mohammed', '0554279362', 'mohammed@gmail.com');
 
 
