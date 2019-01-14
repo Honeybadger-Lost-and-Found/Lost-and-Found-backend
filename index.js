@@ -9,7 +9,7 @@ require('dotenv').config()
 const cloudinary = require('cloudinary')
 const formData = require('express-form-data')
 const cors = require('cors')
-const { CLIENT_ORIGIN } = require('./config')
+const { CLIENT_ORIGIN } = require('./db/config')
 //imageUploadImports END
 
 const app = express()
