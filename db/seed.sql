@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS lost_and_found
 
 CREATE DATABASE lost_and_found
 
-\c
+\c lost_and_found
 
 CREATE TABLE items(
 
