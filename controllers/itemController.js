@@ -5,7 +5,7 @@ const items = require('../models/items');
 
 const sendItems = (req,res) => res.json(res.locals.allItem);
 const sendItem = (req,res) => res.json(res.locals.item);
-const sendSuccess = (req,res) => res.json({message :'success'});
+// const sendSuccess = (req,res) => res.json({message :'success'});
 
 
 

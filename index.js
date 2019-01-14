@@ -1,12 +1,40 @@
-require('dotenv').config()
 const express = require('express')
+const port = 3000;
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+
+//imageUploadImports
+require('dotenv').config()
 const cloudinary = require('cloudinary')
 const formData = require('express-form-data')
 const cors = require('cors')
 const { CLIENT_ORIGIN } = require('./config')
+//imageUploadImports END
 
 const app = express()
+const itemController = require('./controllers/itemController');
 
+app.use(logger('dev'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(methodOverride('_method'));
+
+app.get('/', (req, res) => {
+  res.send('Lost and Found!');
+})
+
+app.use('/items', itemController)
+
+app.listen(port, () => {
+  console.log('---------------------------------------');
+  console.log('Express listening on localhost:' + port);
+  console.log('---------------------------------------');
+});
+
+//IMAGEUPLOAD=================
 cloudinary.config({ 
   cloud_name:"dcf8t0wl3" , 
   api_key: "881314452695989", 
@@ -33,3 +61,5 @@ app.post('/image-upload', (req, res) => {
 })
 
 app.listen(process.env.PORT || 8080, () => console.log('👍'))
+//IMAGEUPLOAD END=================
+
