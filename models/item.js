@@ -1,7 +1,7 @@
 const db = require('../db/config');
-const items ={};
+const item ={};
 
-items.getAll = (req, res, next) => {
+item.getAll = (req, res, next) => {
     db.manyOrNone('SELECT * FROM items;')
       .then((data) => {
         res.locals.items = data;
@@ -13,7 +13,7 @@ items.getAll = (req, res, next) => {
       })
   }
 
-  items.find = (req, res, next) => {
+  item.find = (req, res, next) => {
     const id = req.params.id;
     db.oneOrNone("SELECT * FROM items WHERE id = $1;", [id])
       .then(result => {
@@ -27,9 +27,9 @@ items.getAll = (req, res, next) => {
   }
   
 
-  items.create = (req, res, next) => {
-    db.one('INSERT INTO items (name, type, imageUrl, lat, lon, addedBy, recivedBy, addedDate) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;',
-      [req.body.name, req.body.type, req.body.imageUrl, req.body.lat, req.body.lon,req.body.addedBy,req.body.recivedBy,req.body.addedDate])
+  item.create = (req, res, next) => {
+    db.one('INSERT INTO items (name, type, imageUrl, lat, lon, addedBy, addedDate) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *;',
+      [req.body.name, req.body.type, req.body.imageUrl, req.body.lat, req.body.lon, req.body.addedBy, req.body.addedDate])
       .then((data) => {
         res.locals.item = data;
         next();
@@ -40,9 +40,9 @@ items.getAll = (req, res, next) => {
       })
   }
   
-  items.update = (req, res, next) => {
-    db.one('UPDATE items SET name =$1, type=$2, imageUrl=$3, lat=$4, lon=$5, addedBy=$6, recivedBy=$7, addedDate=$8 WHERE id =$9 RETURNING *;',
-    [req.body.name, req.body.type, req.body.imageUrl, req.body.lat, req.body.lon,req.body.addedBy,req.body.recivedBy,req.body.addedDate, req.params.id])
+  item.update = (req, res, next) => {
+    db.one('UPDATE items SET name =$1, type=$2, imageUrl=$3, lat=$4, lon=$5, addedBy=$6, receivedBy=$7, addedDate=$8 WHERE id =$9 RETURNING *;',
+    [req.body.name, req.body.type, req.body.imageUrl, req.body.lat, req.body.lon, req.body.addedBy, req.body.receivedBy, req.body.addedDate, req.params.id])
     .then((data) => {
         res.locals.item = data;
         next();
@@ -53,7 +53,7 @@ items.getAll = (req, res, next) => {
       })
   }
 
-  items.delete = (req, res, next) => {
+  item.delete = (req, res, next) => {
     db.none('DELETE FROM items WHERE id=$1;', [req.params.id])
       .then(() => {
         console.log('successful delete');
@@ -68,5 +68,5 @@ items.getAll = (req, res, next) => {
 
 
 
-module.exports = items;
+module.exports = item;
   

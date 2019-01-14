@@ -1,17 +1,18 @@
 const express = require('express');
 const router = express.Router();
 
-const items = require('../models/items');
+const item = require('../models/item');
 
-const sendItems = (req,res) => res.json(res.locals.allItem);
+const sendItems = (req,res) => res.json(res.locals.items);
 const sendItem = (req,res) => res.json(res.locals.item);
 // const sendSuccess = (req,res) => res.json({message :'success'});
 
 
 
-router.get('/',items.getAll,sendItems);
-router.get('/:id',item.find,sendItem);
-router.post('/',item.create,sendItem);
-router.put('/:id',item.find,sendItem);
-router.delete('/:id',item.delete,sendSuccess);
+router.get('/', item.getAll, sendItems);
+router.get('/:id', item.find, sendItem);
+router.post('/', item.create, sendItem);
+router.put('/:id', item.update, sendItem);
+// router.delete('/:id',item.delete,sendSuccess);
+
 module.exports = router;

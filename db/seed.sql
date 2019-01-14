@@ -22,7 +22,7 @@ imageUrl VARCHAR,
 lat DOUBLE PRECISION,
 lon DOUBLE PRECISION,
 addedBy INTEGER,
-receivedBy INTEGER,
+receivedBy INTEGER ,
 addedDate DATE,
 FOREIGN KEY(addedBy) REFERENCES contact,
 FOREIGN KEY(receivedBy) REFERENCES contact
