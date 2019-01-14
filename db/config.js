@@ -11,3 +11,7 @@ const config={
 
 const connection = pgInstance(config);
 module.exports=connection;
+
+exports.CLIENT_ORIGIN = process.env.NODE_ENV === 'production'
+  ? 'https://react-image-upload.surge.sh'
+  : 'http://localhost:3000'
