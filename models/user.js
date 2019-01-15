@@ -7,6 +7,7 @@ const user ={};
       [req.body.username, req.body.phone, req.body.email])
       .then((data) => {
         res.locals.user = data;
+        console.log("created: ", data)
         next();
       })
       .catch((error) => {
@@ -15,10 +16,24 @@ const user ={};
       })
   }
 
+  user.getAll = (req, res, next) => {
+    db.manyOrNone("SELECT * FROM users;")
+      .then(result => {
+        res.locals.users = result;
+        console.log(result)
+        next();
+      })
+      .catch(error => {
+        console.log(error);
+        next();
+      })
+  }
+
   user.find = (req, res, next) => {
     db.oneOrNone("SELECT * FROM users WHERE username = $1;", [req.params.username])
       .then(result => {
         res.locals.user = result;
+        console.log("found: ", result)
         next();
       })
       .catch(error => {

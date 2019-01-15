@@ -26,7 +26,7 @@ item.getAll = (req, res, next) => {
   }
 
   item.findItemsByUser = (req, res, next) => {
-      db.manyOrNone("SELECT * FROM items WHERE addedBy = $1;", [req.params.id])
+      db.manyOrNone("SELECT * FROM items WHERE addedBy = $1;", [req.params.username])
         .then(result => {
             res.locals.items = result;
             next();

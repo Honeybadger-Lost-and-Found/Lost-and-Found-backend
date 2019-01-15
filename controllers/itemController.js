@@ -11,7 +11,7 @@ const sendItem = (req, res) => res.json(res.locals.item);
 
 router.get('/', item.getAll, sendItems);
 router.get('/:id', item.find, sendItem);
-router.get('/users/:id', item.findItemsByUser, sendItems);
+router.get('/users/:username', item.findItemsByUser, sendItems);
 
 router.post('/', item.create, sendItem);
 router.put('/:id', item.update, sendItem);
