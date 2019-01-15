@@ -7,7 +7,7 @@ const user ={};
     db.one('INSERT INTO users (userName,phone,email ) VALUES($1, $2, $3, ) RETURNING *;',
       [req.body.userName, req.body.phone, req.body.email])
       .then((data) => {
-        res.locals.item = data;
+        res.locals.user = data;
         next();
       })
       .catch((error) => {
@@ -19,7 +19,7 @@ const user ={};
     const id = req.params.id;
     db.oneOrNone("SELECT * FROM users WHERE id = $1;", [id])
       .then(result => {
-        res.locals.item = result;
+        res.locals.user = result;
         next();
       })
       .catch(error => {
