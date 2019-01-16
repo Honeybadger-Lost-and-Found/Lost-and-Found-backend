@@ -39,8 +39,8 @@ item.getAll = (req, res, next) => {
   
 
   item.create = (req, res, next) => {
-    db.one('INSERT INTO items (name, type, imageUrl, lat, lon, addedBy, addedDate) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *;',
-      [req.body.name, req.body.type, req.body.imageUrl, req.body.lat, req.body.lon, req.body.addedBy, req.body.addedDate])
+    db.one('INSERT INTO items (name, description, type, imageUrl, lat, lon, addedBy, addedDate) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;',
+      [req.body.name, req.body.description, req.body.type, req.body.imageUrl, req.body.lat, req.body.lon, req.body.addedBy, req.body.addedDate])
       .then((data) => {
         res.locals.item = data;
         next();
