@@ -26,7 +26,7 @@ item.getAll = (req, res, next) => {
   }
 
   item.findItemsByUser = (req, res, next) => {
-      db.manyOrNone("SELECT * FROM items WHERE addedBy = $1;", [req.params.username])
+      db.manyOrNone("SELECT * FROM items WHERE addedby = $1;", [req.params.username])
         .then(result => {
             res.locals.items = result;
             next();
@@ -39,8 +39,8 @@ item.getAll = (req, res, next) => {
   
 
   item.create = (req, res, next) => {
-    db.one('INSERT INTO items (name, description, type, imageUrl, lat, lon, addedBy, addedDate) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;',
-      [req.body.name, req.body.description, req.body.type, req.body.imageUrl, req.body.lat, req.body.lon, req.body.addedBy, req.body.addedDate])
+    db.one('INSERT INTO items (name, description, type, imageurl, lat, lon, addedby, addeddate) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;',
+      [req.body.name, req.body.description, req.body.type, req.body.imageurl, req.body.lat, req.body.lon, req.body.addedby, req.body.addeddate])
       .then((data) => {
         res.locals.item = data;
         next();
@@ -52,8 +52,8 @@ item.getAll = (req, res, next) => {
   }
   
   item.update = (req, res, next) => {
-    db.one('UPDATE items SET name =$1, type=$2, imageUrl=$3, lat=$4, lon=$5, addedBy=$6, receivedBy=$7, addedDate=$8 WHERE id =$9 RETURNING *;',
-    [req.body.name, req.body.type, req.body.imageUrl, req.body.lat, req.body.lon, req.body.addedBy, req.body.receivedBy, req.body.addedDate, req.params.id])
+    db.one('UPDATE items SET name=$1, description=$2, type=$3, imageurl=$4, lat=$5, lon=$6, addedby=$7, addeddate=$8 WHERE id=$9 RETURNING *;',
+    [req.body.name, req.body.description, req.body.type, req.body.imageurl, req.body.lat, req.body.lon, req.body.addedby, req.body.addeddate, req.params.id])
     .then((data) => {
         res.locals.item = data;
         next();
