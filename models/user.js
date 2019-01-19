@@ -7,10 +7,7 @@ const user ={};
       [req.body.username, req.body.phone, req.body.email])
       .then((data) => {
         res.locals.user = data;
-<<<<<<< HEAD
-=======
         console.log("created: ", data)
->>>>>>> ee8fd33089683f8548aa64025e17b9633086f8d1
         next();
       })
       .catch((error) => {
@@ -22,12 +19,8 @@ const user ={};
   user.getAll = (req, res, next) => {
     db.manyOrNone("SELECT * FROM users;")
       .then(result => {
-<<<<<<< HEAD
-        res.locals.user = result;
-=======
         res.locals.users = result;
         console.log(result)
->>>>>>> ee8fd33089683f8548aa64025e17b9633086f8d1
         next();
       })
       .catch(error => {
